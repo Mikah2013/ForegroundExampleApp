@@ -170,12 +170,6 @@
                     android:layout_marginTop="20dp"
                     android:orientation="horizontal">
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="2dp"
-                        android:src="@android:drawable/ic_menu_mylocation"
-                        android:contentDescription="@string/snowy_background" />
 
                     <TextView
                         android:id="@+id/location_text"
@@ -184,7 +178,8 @@
                         android:fontFamily="sans-serif-medium"
                         android:textAlignment="viewStart"
                         android:textColor="@color/white"
-                        android:textSize="24dp"/>
+                        android:textSize="24sp"
+                        app:drawableLeftCompat="@android:drawable/ic_menu_mylocation" />
 
 
                 </LinearLayout>
@@ -290,14 +285,16 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:src="@drawable/ic_sunrise_image"/>
+                        android:src="@drawable/ic_sunrise_image"
+                        android:contentDescription="@string/sunrise_icon"/>
 
                     <ImageView
                         android:id="@+id/sunset_icon"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:src="@drawable/ic_sunset_image" />
+                        android:src="@drawable/ic_sunset_image"
+                        android:contentDescription="@string/sunset"/>
 
                 </LinearLayout>
 
@@ -376,21 +373,24 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:src="@drawable/ic_pressure"/>
+                        android:src="@drawable/ic_pressure"
+                        android:contentDescription="@string/pressure"/>
 
                     <ImageView
                         android:id="@+id/humidity_icon"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:src="@drawable/ic_humidity"/>
+                        android:src="@drawable/ic_humidity"
+                        android:contentDescription="@string/humidity"/>
 
                     <ImageView
                         android:id="@+id/wind_speed_icon"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:src="@drawable/ic_wind_speed" />
+                        android:src="@drawable/ic_wind_speed"
+                        android:contentDescription="@string/wind_speed_icon"/>
 
                 </LinearLayout>
 

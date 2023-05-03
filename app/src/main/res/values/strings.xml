@@ -55,4 +55,6 @@
     <string name="stop_location_updates_button_text">Stop Location Tracking</string>
     <string name="no_location_text">No Location</string>
     <string name="my_location">MY_LOCATION</string>
+    <string name="wind_speed_icon">Wind Speed Icon</string>
+    <string name="sunrise_icon">Sunrise Icon</string>
 </resources>
