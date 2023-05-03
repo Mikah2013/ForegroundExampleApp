@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.foregroundexampleapp.ui.HomeFragment">
+
+    <ImageView
+        android:id="@+id/life_buoy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
+        android:src="@drawable/lifebuoy"
+        android:contentDescription="@string/life_buoy" />
+
+    <LinearLayout
+        android:id="@+id/text_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:padding="16dp"
+        android:background="#FFFFFF"
+        android:orientation="vertical">
+        <TextView
+            android:textSize="32sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:text="@string/app_name" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:text="@string/descriptive_text" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/quick_actions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/life_buoy"
+        android:layout_marginTop="12dp"
+        android:layout_marginStart="30dp"
+        android:padding="8dp"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:text="@string/quick_actions" />
+
+    <GridLayout
+        android:id="@+id/grid_layout"
+        android:layout_below="@id/quick_actions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:rowCount="4"
+        android:columnCount="3"
+        android:padding="3dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:useDefaultMargins="true"
+        android:alignmentMode="alignMargins"
+        android:columnOrderPreserved="false">
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/compassButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_column="0"
+            android:layout_row="0"
+            android:background="@drawable/circular_button_background"
+            android:layout_margin="4dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_compass_button"
+            android:padding="1dp"/>
+
+        <TextView
+            android:id="@+id/text_compass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="4dp"
+            android:layout_column="0"
+            android:layout_row="1"
+            android:text="Compass" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/manOverBoardButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_column="1"
+            android:layout_row="0"
+            android:background="@drawable/circular_button_background"
+            android:layout_margin="4dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_lifebuoy_button"
+            android:padding="1dp"/>
+
+        <TextView
+            android:id="@+id/text_help"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="4dp"
+            android:layout_column="1"
+            android:layout_row="1"
+            android:text="Call Help" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/weatherButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_column="2"
+            android:layout_row="0"
+            android:background="@drawable/circular_button_background"
+            android:layout_margin="4dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_weather_button"
+            android:padding="1dp"/>
+
+        <TextView
+            android:id="@+id/text_weather"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="4dp"
+            android:layout_column="2"
+            android:layout_row="1"
+            android:text="Weather" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/marineTipsButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_column="0"
+            android:layout_row="2"
+            android:background="@drawable/circular_button_background"
+            android:layout_margin="4dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_info_button"
+            android:padding="1dp"/>
+
+        <TextView
+            android:id="@+id/text_tips"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="4dp"
+            android:layout_column="0"
+            android:layout_row="3"
+            android:text="Marine Tips" />
+
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/settingsButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_column="1"
+            android:layout_row="2"
+            android:background="@drawable/circular_button_background"
+            android:layout_margin="4dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_gear_button"
+             android:padding="1dp"/>
+
+        <TextView
+            android:id="@+id/text_settings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="4dp"
+            android:layout_column="1"
+            android:layout_row="3"
+            android:text="Settings" />
+
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/supportButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_column="2"
+            android:layout_row="2"
+            android:background="@drawable/circular_button_background"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_support_button"
+            android:padding="1dp"/>
+
+        <TextView
+            android:id="@+id/text_support"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="4dp"
+            android:layout_column="2"
+            android:layout_row="3"
+            android:text="Support" />
+
+        <!-- Add child views here -->
+
+
+
+    </GridLayout>
+
+    <TextView
+        android:id="@+id/from_tsNav"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/grid_layout"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="12dp"
+        android:gravity="bottom|center"
+        android:textAlignment="center"
+        android:padding="8dp"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:text="@string/from_tsNav" />
+
+</RelativeLayout>

@@ -1,0 +1,58 @@
+<resources>
+    <string name="app_name">ForegroundExampleApp</string>
+    <string name="nav_open_drawer">Open Drawer</string>
+    <string name="nav_close_drawer">Close Drawer</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="home">Home</string>
+    <string name="compass">Compass</string>
+    <string name="man_over_board">Man Over Board</string>
+    <string name="marine_tips">Marine Tips</string>
+    <string name="weather">Weather</string>
+    <string name="user_phone">UserPhone</string>
+    <string name="activity_body">Activity body</string>
+    <string name="nav_support">Support</string>
+    <string name="nav_help">Help</string>
+    <string name="nav_feedback">Feedback</string>
+    <string name="nav_about_us">About Us</string>
+    <string name="nav_settings">Settings</string>
+    <string name="heading_0_0">Heading: 0.0</string>
+    <string name="life_buoy">Lifebuoy</string>
+    <string name="descriptive_text">TSNav is a navigation and safety app for boating that is
+        user-friendly and available at no cost. It allows boaters to navigate and communicate
+        with others during emergency situations.</string>
+    <string name="quick_actions">Quick Actions</string>
+    <string name="from_tsNav">TripSpot Consultancy</string>
+
+    <string name="search_places">Search Places</string>
+    <string name="demo_date">26 January, 2:41pm</string>
+    <string name="default_numbers">100</string>
+    <string name="pressure">Pressure</string>
+    <string name="max_temp">Max Temp</string>
+    <string name="humidity">Humidity</string>
+    <string name="mini_temp">Min Temp</string>
+    <string name="wind_speed">Wind</string>
+    <string name="temperature_in_f">Temperature in F</string>
+    <string name="day">Day 17</string>
+    <string name="night">Night 9</string>
+    <string name="main_temp">16*</string>
+    <string name="feels_like">Feels like 16*</string>
+    <string name="feels_like_text">Feels like</string>
+    <string name="weather_type">Drizzle</string>
+    <string name="sunrise">Sunrise</string>
+    <string name="sunset">Sunset</string>
+    <string name="clear_search">Clear Search</string>
+    <string name="snowy_background">Snowy</string>
+    <string name="sunrise_time">07:00</string>
+    <string name="sunset_time">19:06</string>
+    <string name="pressure_si">1015</string>
+    <string name="humidity_percent">58%</string>
+    <string name="wind_speed_kmh">10 km/h</string>
+    <string name="failed_to_fetch_the_response">Failed to fetch the response, check internet connection</string>
+    <string name="weather_descriptive_image">Weather Image</string>
+    <string name="refresh">Refresh</string>
+    <string name="location_area">Namirembe</string>
+    <string name="launch_activity">Track Location</string>
+    <string name="stop_location_updates_button_text">Stop Location Tracking</string>
+    <string name="no_location_text">No Location</string>
+    <string name="my_location">MY_LOCATION</string>
+</resources>
