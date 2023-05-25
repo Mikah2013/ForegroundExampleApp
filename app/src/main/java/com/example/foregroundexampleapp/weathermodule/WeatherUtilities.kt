@@ -1,6 +1,7 @@
 package com.example.foregroundexampleapp.weathermodule
 
 import android.content.Context
+import android.util.Base64
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.location.Location
@@ -44,7 +45,7 @@ class WeatherUtilities {
     fun placeWeatherIcon(listOrArray: List<Weather>): String? {
         val iconCode = listOrArray.map { it.icon }.joinToString(separator = " ")
 
-        return "http://openweathermap.org/img/w/$iconCode.png"
+        return "https://openweathermap.org/img/w/$iconCode.png"
     }
 
     /*fun placeWeatherIcon(listOrArray: List<Weather>): Bitmap? {
@@ -61,6 +62,14 @@ class WeatherUtilities {
             e.printStackTrace()
         }
         return image
+    }*/
+
+    /*fun placeWeatherIcon(listOrArray: List<Weather>): Bitmap? {
+        val iconCode = listOrArray.map { it.icon }.joinToString(separator = " ")
+        val mLink = "http://openweathermap.org/img/w/$iconCode.png"
+        val decodedString: ByteArray = Base64.decode(mLink, Base64.DEFAULT)
+        val decodedBitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
+      return decodedBitmap
     }*/
 
 

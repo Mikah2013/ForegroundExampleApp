@@ -1,10 +1,7 @@
 package com.example.foregroundexampleapp
 
 import android.Manifest
-import android.app.Activity
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.app.Service
+import android.app.*
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -15,6 +12,7 @@ import android.os.Build
 import android.os.IBinder
 import android.os.Looper
 import android.util.Log
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
@@ -33,11 +31,17 @@ class MyForegroundService : Service() {
     private lateinit var locationRequest: LocationRequest
     private var currentActivity: Activity? = null
     private lateinit var locationPreferences: SharedPreferences
+    private var isLocationTrackingEnabled = false
 
     companion object {
         const val NOTIFICATION_ID = 1
         const val FINE_PERMISSION_STRING = Manifest.permission.ACCESS_FINE_LOCATION
         const val COARSE_PERMISSION_STRING = Manifest.permission.ACCESS_COARSE_LOCATION
+        private const val PACKAGE_NAME = "com.example.foregroundexampleapp"
+        private const val EXTRA_CANCEL_LOCATION_TRACKING_FROM_NOTIFICATION =
+            "$PACKAGE_NAME.extra.CANCEL_LOCATION_TRACKING_FROM_NOTIFICATION"
+        private const val EXTRA_START_LOCATION_TRACKING_FROM_NOTIFICATION =
+            "$PACKAGE_NAME.extra.START_LOCATION_TRACKING_FROM_NOTIFICATION"
     }
 
     inner class MyBinder : Binder() {
@@ -55,8 +59,9 @@ class MyForegroundService : Service() {
             getLocationCallback()
             createLocationRequest()
             getLastLocation()
-            createNotification( )
             startLocationUpdates()
+            isLocationTrackingEnabled = true
+            createNotification()
         }
         Log.d(TAG, "Service onCreate")
     }
@@ -69,21 +74,52 @@ class MyForegroundService : Service() {
     override fun onUnbind(intent: Intent?): Boolean {
         if (!mainActivity.isInFocus) {
             Log.d(TAG, "Service onUnbind method called")
-            createNotification()
             startLocationUpdates()
+            createNotification()
         }
         return super.onUnbind(intent)
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        Log.d(TAG, "Service started")
+        Log.d(TAG, "onStartCommand")
         // Perform some background work here
+        if (intent != null) {
+            if (intent.getBooleanExtra(EXTRA_START_LOCATION_TRACKING_FROM_NOTIFICATION, false)) {
+                startLocationTracking()
+            } else if (intent.getBooleanExtra(EXTRA_CANCEL_LOCATION_TRACKING_FROM_NOTIFICATION, false)) {
+                stopLocationTracking()
+            }
+        }
         return START_STICKY
     }
 
     override fun onDestroy() {
         super.onDestroy()
         Log.d(TAG, "Service destroyed")
+    }
+
+    private fun startLocationTracking() {
+        if (!isLocationTrackingEnabled) {
+            // Start location updates
+            getLocationCallback()
+            createLocationRequest()
+            getLastLocation()
+            startLocationUpdates()
+            isLocationTrackingEnabled = true
+            createNotification()
+            Log.d(TAG, "Location Tracking Started")
+        }
+    }
+
+    private fun stopLocationTracking() {
+        if (isLocationTrackingEnabled) {
+            // Stop location updates
+            stopLocationUpdates()
+            isLocationTrackingEnabled = false
+            createNotification()
+            Log.d(TAG, "Location Tracking Stopped")
+
+        }
     }
 
     private fun createLocationRequest() {
@@ -136,7 +172,7 @@ class MyForegroundService : Service() {
         }
     }
 
-    fun startLocationUpdates() {
+    private fun startLocationUpdates() {
         if (ContextCompat.checkSelfPermission(this, FINE_PERMISSION_STRING) != PackageManager.PERMISSION_GRANTED
             && ContextCompat.checkSelfPermission(this, COARSE_PERMISSION_STRING) != PackageManager.PERMISSION_GRANTED) {
             requestLocationPermissions(currentActivity!!)
@@ -151,11 +187,41 @@ class MyForegroundService : Service() {
             val channel = NotificationChannel("my_channel", "My Channel", NotificationManager.IMPORTANCE_DEFAULT)
             notificationManager.createNotificationChannel(channel)
         }
+
+        val startIntent = Intent(this, MainActivity::class.java)
+        startIntent.putExtra(EXTRA_START_LOCATION_TRACKING_FROM_NOTIFICATION, true)
+        val startPendingIntent = PendingIntent.getActivity(this, 0, startIntent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
+
+        val cancelIntent = Intent(this, MyForegroundService::class.java)
+        cancelIntent.putExtra(EXTRA_CANCEL_LOCATION_TRACKING_FROM_NOTIFICATION, true)
+        val cancelPendingIntent = PendingIntent.getService(this, 0, cancelIntent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
+
+        val actionButtonIcon = if (isLocationTrackingEnabled)
+            android.R.drawable.radiobutton_on_background
+        else
+            android.R.drawable.ic_menu_close_clear_cancel
+
+        val actionButtonText = if (!isLocationTrackingEnabled)
+            getString(R.string.start_location_updates_button_text)
+        else
+            getString(R.string.stop_location_updates_button_text)
+
+        val pendingIntent = if (!isLocationTrackingEnabled)
+            startPendingIntent
+        else
+            cancelPendingIntent
+
+
         // Create the notification
         val notification = NotificationCompat.Builder(this, "my_channel")
-            .setContentTitle("My Service")
-            .setContentText("My Service is running in the background.")
+            .setContentTitle(getText(R.string.app_name))
+            .setContentText("Location Tracking in the Background")
             .setSmallIcon(R.drawable.ic_launcher_foreground)
+            .addAction(
+                actionButtonIcon,
+                actionButtonText,
+                pendingIntent
+            )
             .build()
 
         // Start the service in the foreground with the notification
@@ -170,5 +236,37 @@ class MyForegroundService : Service() {
                 mainActivity.PERMISSION_REQUEST_CODE)
         }
     }
+
+    private fun stopLocationUpdates() {
+        if (ContextCompat.checkSelfPermission(this, FINE_PERMISSION_STRING) == PackageManager.PERMISSION_GRANTED
+            && ContextCompat.checkSelfPermission(this, COARSE_PERMISSION_STRING) == PackageManager.PERMISSION_GRANTED) {
+            mFusedLocationClient.removeLocationUpdates(locationCallback)
+        }
+    }
+
+    /*private fun startLocationTracking() {
+        if (!mainActivity.isInFocus && !isLocationTrackingEnabled) {
+            // Start location updates
+            getLocationCallback()
+            createLocationRequest()
+            getLastLocation()
+            isLocationTrackingEnabled = true
+            createNotification()
+            startLocationUpdates()
+            Log.d(TAG, "Location Tracking Started")
+        }
+    }*/
+
+    /*private fun stopLocationTracking() {
+        if (isLocationTrackingEnabled) {
+            // Stop location updates
+            stopLocationUpdates()
+            isLocationTrackingEnabled = false
+            createNotification()
+            Log.d(TAG, "Location Tracking Stopped")
+
+        }
+    }*/
+
 
 }

@@ -32,8 +32,8 @@ class HomeFragment : Fragment() {
             weatherButton.setOnClickListener {
                 mainActivity.replaceFragment(WeatherFragment(), "Weather", R.id.weather_fragment, mainActivity.binding.navView)
             }
-            manOverBoardButton.setOnClickListener {
-                mainActivity.replaceFragment(ManOverBoardFragment(), "Man Overboard", R.id.man_over_board_fragment, mainActivity.binding.navView)
+            callForHelpButton.setOnClickListener {
+                mainActivity.replaceFragment(CallForHelpFragment(), "Call For Help", R.id.man_over_board_fragment, mainActivity.binding.navView)
             }
         }
     }

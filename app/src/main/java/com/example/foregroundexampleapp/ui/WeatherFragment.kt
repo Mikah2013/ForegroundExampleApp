@@ -9,7 +9,8 @@ import android.view.*
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import coil.load
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.example.foregroundexampleapp.R
 import com.example.foregroundexampleapp.databinding.FragmentWeatherBinding
 import com.example.foregroundexampleapp.weathermodule.WeatherRepository
@@ -148,7 +149,15 @@ class WeatherFragment : Fragment() {
                 binding.windSpeedText.text = windSpeedText
                 binding.locationText.text = mLocationText
 
-                binding.weatherIcon.load(weatherIcon)
+                val requestOptions = RequestOptions()
+                    .override(800, 600)
+
+                Glide.with(requireContext())
+                    .load(weatherIcon)
+                    .apply(requestOptions)
+                    .into(binding.weatherIcon)
+
+
 
                 Log.d(TAG, "Weather Type icon link is: $weatherIcon")
 

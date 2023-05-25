@@ -90,7 +90,7 @@ class MainActivity : AppCompatActivity() {
                     }
                     R.id.man_over_board_fragment -> {
                         replaceFragment(
-                            ManOverBoardFragment(),
+                            CallForHelpFragment(),
                             it.title.toString(),
                             R.id.man_over_board_fragment,
                             navView
